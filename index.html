@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Updates Library</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Folders">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H10l2 2h5.5A2.5 2.5 0 0 1 20 9.5v7A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"/>
+          </svg>
+        </div>
+        <div>
+          <h1>CRM Updates</h1>
+          <p>Flow Library</p>
+        </div>
+      </div>
+
+      <label class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16.5 16.5 3.5 3.5"></path>
+        </svg>
+        <input id="searchInput" type="search" autocomplete="off" placeholder="Search automations">
+      </label>
+
+      <nav id="folderTree" class="folder-tree"></nav>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Go High Level Automation Preview</p>
+          <h2 id="pageTitle">Meta - Lead Updates</h2>
+        </div>
+        <div class="topbar-actions">
+          <button id="togglePreviewBtn" class="icon-button" type="button" title="Toggle preview" aria-label="Toggle preview">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+          <a id="openCurrentLink" class="primary-action" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3h7v7"></path>
+              <path d="M10 14 21 3"></path>
+              <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+            </svg>
+            Open
+          </a>
+        </div>
+      </header>
+
+      <section class="stats-strip" aria-label="Summary">
+        <div>
+          <span id="folderCount">0</span>
+          <small>folders</small>
+        </div>
+        <div>
+          <span id="flowCount">0</span>
+          <small>automations</small>
+        </div>
+        <div>
+          <span id="variantCount">0</span>
+          <small>variants</small>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="library-panel">
+          <div class="section-heading">
+            <h3>Automations</h3>
+            <span id="resultCount">0 results</span>
+          </div>
+          <div id="automationList" class="automation-list"></div>
+        </div>
+
+        <section id="previewPanel" class="preview-panel" aria-label="Preview">
+          <div class="preview-header">
+            <div>
+              <p id="previewPath" class="preview-path">Select an automation</p>
+              <h3 id="previewTitle">Preview</h3>
+            </div>
+            <a id="previewOpenLink" class="ghost-action" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 3h7v7"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+              </svg>
+              New tab
+            </a>
+          </div>
+          <iframe id="previewFrame" title="Automation preview"></iframe>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Meta Video Form Opt-In Lead Capture · FlowViz</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F3EE;--surf:#FFFFFF;--surf2:#F0EDE6;--border:#E2DED5;--border-h:#C8C3BA;
+  --text:#1A1814;--muted:#6B6860;
+  --accent:#534AB7;--accent-l:#EEEDFE;--accent-m:#AFA9EC;
+  --green:#0F6E56;--green-bg:#E1F5EE;
+  --amber:#BA7517;--amber-bg:#FAEEDA;
+  --r:8px;--r-lg:12px;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.doc-header{background:var(--surf);border-bottom:0.5px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;top:0;z-index:10}
+.hb{display:flex;align-items:center;gap:12px}
+.hlogo{width:34px;height:34px;background:var(--accent-l);border-radius:7px;display:flex;align-items:center;justify-content:center;border:0.5px solid var(--accent-m);flex-shrink:0}
+.hlogo svg{width:17px;height:17px}
+.hname{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.hdate{font-size:11px;color:var(--muted);font-family:monospace}
+.main{max-width:1060px;margin:0 auto;padding:28px 40px 60px}
+.title-sec{margin-bottom:22px}
+.eyebrow{font-size:10.5px;font-family:monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.doc-title{font-size:24px;font-weight:700;letter-spacing:-.02em;color:var(--text);margin-bottom:8px}
+.doc-purpose{font-size:13.5px;color:var(--muted);line-height:1.6;max-width:680px;margin-bottom:14px}
+.meta-row{display:flex;gap:12px;flex-wrap:wrap}
+.meta-item{display:flex;flex-direction:column;gap:2px}
+.meta-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-family:monospace}
+.meta-item code{font-size:11.5px;color:var(--accent);background:var(--accent-l);padding:2px 8px;border-radius:4px;font-family:monospace}
+.tabs{display:flex;gap:4px;background:var(--surf2);padding:4px;border-radius:var(--r);width:fit-content;margin-bottom:18px;border:0.5px solid var(--border)}
+.tab{padding:7px 16px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--muted);transition:all .15s}
+.tab.on{background:var(--surf);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.07);border:0.5px solid var(--border)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:16px}
+.summary-chip{background:var(--surf2);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.chip-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.chip-text{font-size:13px;color:var(--muted);line-height:1.5}
+.section-card{background:var(--surf);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:20px;margin-bottom:14px}
+.section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:13px}
+.detail-list{display:grid;gap:9px}
+.detail-card{background:var(--surf2);border:0.5px solid var(--border);border-radius:var(--r);padding:14px;transition:border-color .2s}
+.detail-card:hover{border-color:var(--border-h)}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.card-head-l{display:flex;align-items:center;gap:9px}
+.card-title{font-size:14px;font-weight:600;color:var(--text)}
+.card-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.card-desc{font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.impact{font-size:12px;color:var(--green);margin-bottom:8px}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--accent-l);border:0.5px solid var(--accent-m);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0}
+.badge{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+.b-trigger{background:var(--green-bg);color:var(--green)}
+.b-action{background:var(--accent-l);color:var(--accent)}
+.b-condition{background:var(--amber-bg);color:var(--amber)}
+.b-delay{background:#F3F0FB;color:#534AB7}
+.params{display:flex;flex-wrap:wrap;gap:6px}
+.param-tag{background:var(--surf);border:0.5px solid var(--border);border-radius:6px;padding:3px 9px;font-size:11.5px;font-family:monospace}
+.pk{color:var(--muted)}.pv{color:var(--accent)}
+.ascii-box{background:var(--surf2);border:0.5px solid var(--border);border-radius:var(--r);padding:18px;font-family:'Cascadia Code','Fira Code','Courier New',monospace;font-size:12.5px;line-height:1.7;white-space:pre;overflow-x:auto;color:var(--green)}
+.dep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.dep-card{background:var(--surf2);border:0.5px solid var(--border);border-radius:var(--r);padding:13px;text-align:center}
+.dep-name{font-size:13px;font-weight:600;margin-bottom:4px;color:var(--text)}
+.dep-purpose{font-size:11.5px;color:var(--muted)}
+.flow-controls{display:flex;gap:8px;margin-bottom:16px}
+.fc-btn{background:var(--surf);border:0.5px solid var(--border);border-radius:6px;color:var(--muted);cursor:pointer;font-size:12px;padding:5px 14px;transition:all .15s}
+.fc-btn:hover{border-color:var(--accent);color:var(--accent)}
+.flow-outer{display:flex;flex-direction:column;align-items:center;padding:4px 0}
+.vcard{width:280px;background:var(--surf);border:0.5px solid var(--border);border-left:3px solid var(--nc,#8a8278);border-radius:8px;cursor:pointer;transition:box-shadow .15s;user-select:none}
+.vcard:hover{box-shadow:0 2px 12px rgba(26,24,20,.08)}
+.vcard-head{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.vcard-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:monospace;font-weight:700;flex-shrink:0}
+.vcard-body{flex:1;min-width:0}
+.vcard-title{font-weight:600;font-size:13.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vcard-sub{font-size:10.5px;color:var(--muted);font-family:monospace;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vcard-chev{font-size:15px;color:var(--muted);margin-left:auto;flex-shrink:0;transition:transform .15s}
+.vcard.open .vcard-chev{transform:rotate(90deg)}
+.vcard-params{display:none;padding:0 14px 12px;border-top:0.5px solid var(--border)}
+.vcard.open .vcard-params{display:block}
+.vp-row{display:flex;gap:12px;padding:4px 0;font-size:11.5px;border-bottom:0.5px solid var(--border)}
+.vp-row:last-child{border:none}
+.vp-key{color:var(--muted);font-family:monospace;font-size:10.5px;min-width:110px;flex-shrink:0}
+.vp-val{color:var(--accent);font-family:monospace;font-size:11px;word-break:break-all}
+.vend{display:flex;align-items:center;gap:9px;padding:9px 16px;background:var(--surf2);border:0.5px solid var(--border);border-radius:20px;font-size:12.5px;font-family:monospace;color:var(--muted)}
+.vend-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);flex-shrink:0}
+.vconn{display:flex;flex-direction:column;align-items:center;height:44px;position:relative}
+.vconn::before,.vconn::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:0.5px;background:var(--border)}
+.vconn::before{top:0;height:calc(50% - 10px)}
+.vconn::after{bottom:0;height:calc(50% - 10px)}
+.vconn-c{width:20px;height:20px;border-radius:50%;border:0.5px solid var(--border);background:var(--surf);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);position:relative;z-index:1;margin:auto}
+.vbranch{display:flex;flex-direction:column;align-items:center;width:100%}
+.vbranch-row{display:flex;gap:20px;justify-content:center;width:100%}
+.vbranch-col{display:flex;flex-direction:column;align-items:center;flex:1;max-width:320px;min-width:0}
+.branch-pill{font-family:monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-bottom:8px;display:inline-block}
+.bp-yes{background:#C0E8D6;color:#0F6E56}
+.bp-no{background:#CECBF6;color:#534AB7}
+.doc-footer{border-top:0.5px solid var(--border);margin-top:32px;padding:16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-l{font-size:13px;color:var(--muted)}
+.footer-r{font-size:11px;font-family:monospace;color:var(--muted)}
+@media(max-width:700px){.main{padding:16px}.doc-header{padding:12px 16px}.vcard{width:100%}.vbranch-row{flex-direction:column;align-items:center}.vbranch-col{max-width:100%;width:100%}}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="hb">
+    <div class="hlogo"><svg viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h8M3 13h10" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <span class="hname">FlowViz</span>
+  </div>
+  <span class="hdate">June 26, 2026 · Haiku 4.5</span>
+</div>
+
+<div class="main">
+  <div class="title-sec">
+    <p class="eyebrow">Form Submitted — Video Form Opt In</p>
+    <h1 class="doc-title">Meta Video Form Opt-In Lead Capture</h1>
+    <p class="doc-purpose">Automatically captures and qualifies leads who submit the video form opt-in from Meta ads. The workflow segments new vs. existing leads, assigns appropriate tags and source attribution, and records their opt-in date for follow-up nurturing.</p>
+    <div class="meta-row"><div class="meta-item"><span class="meta-label">Platform</span><code>GoHighLevel</code></div><div class="meta-item"><span class="meta-label">Trigger type</span><code>form</code></div><div class="meta-item"><span class="meta-label">Form ID</span><code>VJuLVvq69P41Hy6X9AXn</code></div><div class="meta-item"><span class="meta-label">Operator</span><code>is-any-of</code></div></div>
+  </div>
+
+  <div class="tabs" id="tab-bar">
+    <button class="tab on" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="diagram">Flow Diagram</button>
+    <button class="tab" data-tab="steps">Steps</button>
+    <button class="tab" data-tab="ascii">ASCII Map</button>
+    <button class="tab" data-tab="deps">Dependencies</button>
+  </div>
+
+  <div id="tab-overview">
+    <div class="summary-grid"><div class="summary-chip"><span class="chip-icon">🎯</span><span class="chip-text">Triggers only on specific Meta video form submission (VJuLVvq69P41Hy6X9AXn)</span></div><div class="summary-chip"><span class="chip-icon">⚡</span><span class="chip-text">Differentiates new leads (no lifecycle stage) from existing contacts for tailored onboarding</span></div><div class="summary-chip"><span class="chip-icon">🔗</span><span class="chip-text">Records Meta as source and VSL opt-in date for attribution and follow-up sequencing</span></div><div class="summary-chip"><span class="chip-icon">✅</span><span class="chip-text">Adds RYM Interview VSL opt-in to both new and existing leads for campaign tracking</span></div></div>
+    <div class="section-card">
+      <div class="section-label">Trigger</div>
+      <div class="detail-list">
+    <div class="detail-card">
+      <div class="card-head"><div class="card-title">Form Submitted - Video Form Opt In</div><span class="badge b-trigger">form</span></div>
+      <div class="card-desc">Fires when the specific Meta video form opt-in form is submitted</div><div class="params"><span class="param-tag"><span class="pk">Form ID: </span><span class="pv">VJuLVvq69P41Hy6X9AXn</span></span><span class="param-tag"><span class="pk">Operator: </span><span class="pv">is-any-of</span></span></div>
+    </div></div>
+    </div>
+  </div>
+
+  <div id="tab-diagram" style="display:none">
+    <div class="section-card">
+      <div class="flow-controls">
+        <button class="fc-btn" id="btn-expand">Expand all</button>
+        <button class="fc-btn" id="btn-collapse">Collapse all</button>
+      </div>
+      <div class="flow-outer" id="vtree"></div>
+    </div>
+  </div>
+
+  <div id="tab-steps" style="display:none">
+    <div class="section-card">
+      <div class="section-label">Workflow steps</div>
+      <div class="detail-list">
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">1</div>
+          <div><div class="card-title">Add Tag - In-Video Form Opt-In (New Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Tags new leads with in-video form opt-in tracking tag</div>
+      <div class="impact">💡 Marks newly acquired leads for campaign attribution and follow-up workflows</div><div class="params"><span class="param-tag"><span class="pk">Tag: </span><span class="pv">in-video form opt-in</span></span></div>
+    </div>
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">2</div>
+          <div><div class="card-title">Update Contact Source to Meta (New Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Sets contact source field to Meta for new leads</div>
+      <div class="impact">💡 Tracks lead origin for ROI analysis and ad performance measurement</div><div class="params"><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">tPwTS2b8LEOkAggIj5l6</span></span><span class="param-tag"><span class="pk">Field Label: </span><span class="pv">Contact Source</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">Meta</span></span></div>
+    </div>
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">3</div>
+          <div><div class="card-title">Update Lifecycle Stage, Type &amp; Opt-Ins (New Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Sets lifecycle stage to Lead, type to replace_your_mortgage, and adds VSL opt-in</div>
+      <div class="impact">💡 Establishes lead qualification status and product interest for routing to appropriate nurture sequences</div><div class="params"><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">grzaUscZCdksUY6lyGsB</span></span><span class="param-tag"><span class="pk">Label: </span><span class="pv">Contact Lifecycle Stage</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">Lead</span></span><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">type</span></span><span class="param-tag"><span class="pk">Label: </span><span class="pv">Contact Type</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">replace_your_mortgage</span></span><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">LZ7mCkWA5FxGrnseI6Mb</span></span><span class="param-tag"><span class="pk">Label: </span><span class="pv">Contact Opt In&#39;s</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">RYM Interview VSL - Meta - Video-Form-Version</span></span></div>
+    </div>
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">4</div>
+          <div><div class="card-title">Set VSL Opt-In Date (New Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Records the current date as VSL opt-in date for new leads</div>
+      <div class="impact">💡 Timestamps enrollment for follow-up scheduling and campaign performance analytics</div><div class="params"><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">t0ZN0CGuDc70s74pB1iO</span></span><span class="param-tag"><span class="pk">Label: </span><span class="pv">VSL Opt-In Date</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">currentDate</span></span></div>
+    </div>
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">5</div>
+          <div><div class="card-title">Add Tag - In-Video Form Opt-In (Existing Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Tags existing leads with in-video form opt-in tracking tag</div>
+      <div class="impact">💡 Marks existing leads for re-engagement and second conversion attempt tracking</div><div class="params"><span class="param-tag"><span class="pk">Tag: </span><span class="pv">in-video form opt-in</span></span></div>
+    </div>
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">6</div>
+          <div><div class="card-title">Update Opt-Ins (Existing Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Adds RYM Interview VSL opt-in to existing contact&#39;s opt-in list</div>
+      <div class="impact">💡 Updates engagement preferences to reflect new interest and trigger relevant campaigns</div><div class="params"><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">LZ7mCkWA5FxGrnseI6Mb</span></span><span class="param-tag"><span class="pk">Label: </span><span class="pv">Contact Opt In&#39;s</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">RYM Interview VSL - Meta - Video-Form-Version</span></span></div>
+    </div>
+    <div class="detail-card">
+      <div class="card-head">
+        <div class="card-head-l"><div class="step-num">7</div>
+          <div><div class="card-title">Set VSL Opt-In Date (Existing Lead)</div><div class="card-sub">GoHighLevel</div></div>
+        </div>
+        <span class="badge b-action">action</span>
+      </div>
+      <div class="card-desc">Records the current date as VSL opt-in date for existing leads</div>
+      <div class="impact">💡 Tracks re-engagement timing and segments leads by recency of interest</div><div class="params"><span class="param-tag"><span class="pk">Field ID: </span><span class="pv">t0ZN0CGuDc70s74pB1iO</span></span><span class="param-tag"><span class="pk">Label: </span><span class="pv">VSL Opt-In Date</span></span><span class="param-tag"><span class="pk">Value: </span><span class="pv">currentDate</span></span></div>
+    </div></div>
+    </div>
+  </div>
+
+  <div id="tab-ascii" style="display:none">
+    <div class="section-card">
+      <div class="section-label">ASCII flow diagram</div>
+      <div class="ascii-box">◉ Form Submitted
+│
+├─ Video Form ID: VJuLVvq69P41Hy6X9AXn
+│
+▼
+◆ Is Lifecycle Stage Empty?
+│
+├─ YES (New Lead) ────────────────────┐
+│  ├─ Add Tag: in-video form opt-in  │
+│  ├─ Set Source: Meta               │
+│  ├─ Set Stage: Lead, Type: RYM     │
+│  ├─ Add Opt-In: RYM Interview VSL  │
+│  └─ Set VSL Opt-In Date            │
+│                                     ▼
+│                                    End
+│
+└─ NO (Existing Lead) ────────────────┐
+   ├─ Add Tag: in-video form opt-in  │
+   ├─ Add Opt-In: RYM Interview VSL  │
+   └─ Set VSL Opt-In Date            │
+                                      ▼
+                                     End</div>
+    </div>
+  </div>
+
+  <div id="tab-deps" style="display:none">
+    <div class="section-card">
+      <div class="section-label">External dependencies</div>
+      <div class="dep-grid">
+    <div class="dep-card">
+      <div class="dep-name">GoHighLevel CRM</div>
+      <div class="dep-purpose">Contact management, field updates, and tag application</div>
+      <span class="badge b-trigger" style="margin-top:7px;display:inline-block">Required</span>
+    </div>
+    <div class="dep-card">
+      <div class="dep-name">Meta Ads Integration</div>
+      <div class="dep-purpose">Form submission trigger from Meta advertising platform</div>
+      <span class="badge b-trigger" style="margin-top:7px;display:inline-block">Required</span>
+    </div></div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <span class="footer-l">Generated with FlowViz</span>
+    <span class="footer-r">Model: Haiku 4.5 · June 26, 2026</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  var TABS=['overview','diagram','steps','ascii','deps'];
+  document.getElementById('tab-bar').addEventListener('click',function(e){
+    var btn=e.target.closest('[data-tab]');
+    if(!btn)return;
+    var tab=btn.dataset.tab;
+    document.querySelectorAll('#tab-bar .tab').forEach(function(t){
+      t.classList.toggle('on',t.dataset.tab===tab);
+    });
+    TABS.forEach(function(id){
+      var el=document.getElementById('tab-'+id);
+      if(el)el.style.display=id===tab?'':'none';
+    });
+  });
+})();
+
+(function(){
+  var nodes=[{"id":"n1","type":"trigger","label":"Form Submitted","sub":"Trigger: form_submission","description":"Meta video form opt-in submitted (Form ID: VJuLVvq69P41Hy6X9AXn)","app":"GoHighLevel","params":[["Form ID","VJuLVvq69P41Hy6X9AXn"]],"connections":[{"to":"n2","label":null}]},{"id":"n2","type":"condition","label":"New or Existing?","sub":"Condition: if-else","description":"Check if Contact Lifecycle Stage field is empty","app":null,"params":[["Field","grzaUscZCdksUY6lyGsB"],["Operator","has_no_value"]],"connections":[{"to":"n3","label":"YES"},{"to":"n6","label":"NO"}]},{"id":"n3","type":"action","label":"Tag New Lead","sub":"Action: add_contact_tag","description":"Add in-video form opt-in tag","app":"GoHighLevel","params":[["Tag","in-video form opt-in"]],"connections":[{"to":"n4","label":null}]},{"id":"n4","type":"action","label":"Set Source Meta","sub":"Action: update_contact_field","description":"Set Contact Source to Meta","app":"GoHighLevel","params":[["Field ID","tPwTS2b8LEOkAggIj5l6"],["Value","Meta"]],"connections":[{"to":"n5","label":null}]},{"id":"n5","type":"action","label":"Set Stage Lead","sub":"Action: update_contact_field","description":"Set Lifecycle Stage to Lead, Type to replace_your_mortgage, Opt-In to RYM Interview VSL","app":"GoHighLevel","params":[["Field ID","grzaUscZCdksUY6lyGsB"],["Value","Lead"],["Field ID","type"],["Value","replace_your_mortgage"],["Field ID","LZ7mCkWA5FxGrnseI6Mb"],["Value","RYM Interview VSL - Meta - Video-Form-Version"]],"connections":[{"to":"n7","label":null}]},{"id":"n7","type":"action","label":"Set Opt-In Date","sub":"Action: update_contact_field","description":"Set VSL Opt-In Date to current date","app":"GoHighLevel","params":[["Field ID","t0ZN0CGuDc70s74pB1iO"],["Value","currentDate"]],"connections":[{"to":"n9","label":null}]},{"id":"n6","type":"action","label":"Tag Existing","sub":"Action: add_contact_tag","description":"Add in-video form opt-in tag to existing lead","app":"GoHighLevel","params":[["Tag","in-video form opt-in"]],"connections":[{"to":"n8","label":null}]},{"id":"n8","type":"action","label":"Update Opt-Ins","sub":"Action: update_contact_field","description":"Add RYM Interview VSL to existing contact's opt-ins","app":"GoHighLevel","params":[["Field ID","LZ7mCkWA5FxGrnseI6Mb"],["Value","RYM Interview VSL - Meta - Video-Form-Version"]],"connections":[{"to":"n9","label":null}]},{"id":"n9","type":"action","label":"Set Opt-In Date","sub":"Action: update_contact_field","description":"Set VSL Opt-In Date to current date","app":"GoHighLevel","params":[["Field ID","t0ZN0CGuDc70s74pB1iO"],["Value","currentDate"]],"connections":[{"to":"n10","label":null}]},{"id":"n10","type":"end","label":"Lead Updated","sub":null,"description":"Workflow complete","app":null,"params":[],"connections":[]}];
+  var actions=[{"id":"a1","name":"Add Tag - In-Video Form Opt-In (New Lead)","app":"GoHighLevel","type":"action","sub":"Action: add_contact_tag","description":"Tags new leads with in-video form opt-in tracking tag","params":[["Tag","in-video form opt-in"]],"business_impact":"Marks newly acquired leads for campaign attribution and follow-up workflows"},{"id":"a2","name":"Update Contact Source to Meta (New Lead)","app":"GoHighLevel","type":"action","sub":"Action: update_contact_field","description":"Sets contact source field to Meta for new leads","params":[["Field ID","tPwTS2b8LEOkAggIj5l6"],["Field Label","Contact Source"],["Value","Meta"]],"business_impact":"Tracks lead origin for ROI analysis and ad performance measurement"},{"id":"a3","name":"Update Lifecycle Stage, Type & Opt-Ins (New Lead)","app":"GoHighLevel","type":"action","sub":"Action: update_contact_field","description":"Sets lifecycle stage to Lead, type to replace_your_mortgage, and adds VSL opt-in","params":[["Field ID","grzaUscZCdksUY6lyGsB"],["Label","Contact Lifecycle Stage"],["Value","Lead"],["Field ID","type"],["Label","Contact Type"],["Value","replace_your_mortgage"],["Field ID","LZ7mCkWA5FxGrnseI6Mb"],["Label","Contact Opt In's"],["Value","RYM Interview VSL - Meta - Video-Form-Version"]],"business_impact":"Establishes lead qualification status and product interest for routing to appropriate nurture sequences"},{"id":"a4","name":"Set VSL Opt-In Date (New Lead)","app":"GoHighLevel","type":"action","sub":"Action: update_contact_field","description":"Records the current date as VSL opt-in date for new leads","params":[["Field ID","t0ZN0CGuDc70s74pB1iO"],["Label","VSL Opt-In Date"],["Value","currentDate"]],"business_impact":"Timestamps enrollment for follow-up scheduling and campaign performance analytics"},{"id":"a5","name":"Add Tag - In-Video Form Opt-In (Existing Lead)","app":"GoHighLevel","type":"action","sub":"Action: add_contact_tag","description":"Tags existing leads with in-video form opt-in tracking tag","params":[["Tag","in-video form opt-in"]],"business_impact":"Marks existing leads for re-engagement and second conversion attempt tracking"},{"id":"a6","name":"Update Opt-Ins (Existing Lead)","app":"GoHighLevel","type":"action","sub":"Action: update_contact_field","description":"Adds RYM Interview VSL opt-in to existing contact's opt-in list","params":[["Field ID","LZ7mCkWA5FxGrnseI6Mb"],["Label","Contact Opt In's"],["Value","RYM Interview VSL - Meta - Video-Form-Version"]],"business_impact":"Updates engagement preferences to reflect new interest and trigger relevant campaigns"},{"id":"a7","name":"Set VSL Opt-In Date (Existing Lead)","app":"GoHighLevel","type":"action","sub":"Action: update_contact_field","description":"Records the current date as VSL opt-in date for existing leads","params":[["Field ID","t0ZN0CGuDc70s74pB1iO"],["Label","VSL Opt-In Date"],["Value","currentDate"]],"business_impact":"Tracks re-engagement timing and segments leads by recency of interest"}];
+  nodes.forEach(function(n){n.type=(n.type||'').toLowerCase();});
+  var map={};nodes.forEach(function(n){if(n.id)map[n.id]=n;});
+
+  var C={
+    trigger:{color:'#185FA5',bg:'#E6F1FB',icon:'TR'},
+    action:{color:'#0F6E56',bg:'#E1F5EE',icon:'A'},
+    condition:{color:'#BA7517',bg:'#FAEEDA',icon:'IF'},
+    wait:{color:'#534AB7',bg:'#EEEDFE',icon:'W'},
+    delay:{color:'#534AB7',bg:'#EEEDFE',icon:'W'},
+    end:{color:'#5a5550',bg:'#F0EDE6',icon:'·'}
+  };
+  var _id=0;
+  function uid(){return 'vc'+(++_id);}
+  function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function pb(params){
+    var p=(params||[]).filter(function(x){return x&&x[0]&&x[1];});
+    if(!p.length)return'';
+    return'<div class="vcard-params"><div>'+p.map(function(r){return'<div class="vp-row"><span class="vp-key">'+e(r[0])+'</span><span class="vp-val">'+e(String(r[1]).slice(0,80))+'</span></div>';}).join('')+'</div></div>';
+  }
+  function card(n){
+    var c=C[n.type]||C.action;
+    if(n.type==='end')return'<div class="vend"><div class="vend-dot"></div>'+e(n.label||'End')+'</div>';
+    var id=uid();
+    return'<div class="vcard" id="'+id+'" style="--nc:'+c.color+'">'
+      +'<div class="vcard-head"><div class="vcard-icon" style="background:'+c.bg+';color:'+c.color+'">'+c.icon+'</div>'
+      +'<div class="vcard-body"><div class="vcard-title">'+e(n.label||n.name||'Step')+'</div>'
+      +'<div class="vcard-sub">'+e(n.sub||n.type)+(n.app?' · '+e(n.app):'')+'</div></div>'
+      +'<div class="vcard-chev">›</div></div>'+pb(n.params)+'</div>';
+  }
+  function conn(){return'<div class="vconn"><div class="vconn-c">↓</div></div>';}
+  function bfs(sid,seen){var q=[sid],vis={},ord=[];while(q.length){var id=q.shift();if(!id||vis[id]||seen[id]||!map[id])continue;vis[id]=true;ord.push(id);(map[id].connections||[]).forEach(function(c){q.push(c.to);});}return ord;}
+  function merge(yId,nId,seen){var ns={};bfs(nId,seen).forEach(function(id){ns[id]=true;});var yo=bfs(yId,seen);for(var i=0;i<yo.length;i++){if(ns[yo[i]])return yo[i];}return null;}
+  function flow(sid,stop,seen){
+    seen=seen||{};if(!sid||sid===stop||seen[sid]||!map[sid])return'';
+    var n=map[sid];var s2=Object.assign({},seen);s2[sid]=true;
+    var cs=n.connections||[];var h=card(n);
+    if(n.type==='end'||!cs.length)return h;
+    if(n.type==='condition'&&cs.length>=2){
+      var yc=cs.find(function(c){return/yes/i.test(c.label||'');})||cs[0];
+      var nc=cs.find(function(c){return/no/i.test(c.label||'');})||cs[1];
+      var mg=merge(yc.to,nc.to,s2);
+      var br='<div class="vbranch"><div class="vbranch-row">'
+        +'<div class="vbranch-col"><span class="branch-pill bp-yes">YES</span>'+flow(yc.to,mg,Object.assign({},s2))+'</div>'
+        +'<div class="vbranch-col"><span class="branch-pill bp-no">NO</span>'+flow(nc.to,mg,Object.assign({},s2))+'</div>'
+        +'</div></div>';
+      return h+conn()+br+(mg?conn()+flow(mg,stop,Object.assign({},s2)):'');
+    }
+    return h+conn()+flow(cs[0].to,stop,s2);
+  }
+  function fallback(){
+    return actions.map(function(a,i){
+      var t=(a.type||'action').toLowerCase();var c=C[t]||C.action;var id=uid();
+      var h='<div class="vcard" id="'+id+'" style="--nc:'+c.color+'">'
+        +'<div class="vcard-head"><div class="vcard-icon" style="background:'+c.bg+';color:'+c.color+'">'+(i+1)+'</div>'
+        +'<div class="vcard-body"><div class="vcard-title">'+e(a.name||'Step '+(i+1))+'</div>'
+        +'<div class="vcard-sub">'+e(a.sub||a.type||'action')+(a.app?' · '+e(a.app):'')+'</div></div>'
+        +'<div class="vcard-chev">›</div></div>'+pb(a.params)+'</div>';
+      return i<actions.length-1?h+conn():h;
+    }).join('');
+  }
+  var vtree=document.getElementById('vtree');
+  if(!vtree)return;
+  try{
+    var trig=nodes.find(function(n){return n.type==='trigger';});
+    var html=trig?flow(trig.id,null,{}):'';
+    vtree.innerHTML=html||(actions.length?fallback():'<p style="color:var(--muted);font-size:13px;text-align:center;padding:24px">No diagram data.</p>');
+  }catch(err){console.error('[FlowViz]',err);try{vtree.innerHTML=fallback();}catch(e2){}}
+
+  vtree.addEventListener('click',function(ev){
+    var card=ev.target.closest('.vcard');
+    if(card)card.classList.toggle('open');
+  });
+  var be=document.getElementById('btn-expand');
+  var bc=document.getElementById('btn-collapse');
+  if(be)be.addEventListener('click',function(){document.querySelectorAll('.vcard').forEach(function(el){el.classList.add('open');});});
+  if(bc)bc.addEventListener('click',function(){document.querySelectorAll('.vcard').forEach(function(el){el.classList.remove('open');});});
+})();
+</script>
+</body>
+</html>
