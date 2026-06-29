@@ -45,6 +45,19 @@
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
           </button>
+          <button id="addFolderBtn" class="secondary-action" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14"></path>
+              <path d="M5 12h14"></path>
+            </svg>
+            Folder
+          </button>
+          <button id="resetLayoutBtn" class="icon-button" type="button" title="Reset organization" aria-label="Reset organization">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 3-6.7"></path>
+              <path d="M3 4v6h6"></path>
+            </svg>
+          </button>
           <a id="openCurrentLink" class="primary-action" href="#" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M14 3h7v7"></path>
@@ -74,7 +87,10 @@
       <section class="content-grid">
         <div class="library-panel">
           <div class="section-heading">
-            <h3>Automations</h3>
+            <div>
+              <h3>Organization</h3>
+              <p>Folder workspace</p>
+            </div>
             <span id="resultCount">0 results</span>
           </div>
           <div id="automationList" class="automation-list"></div>

@@ -31,7 +31,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -157,7 +158,8 @@ svg {
 
 .tree-toggle:hover,
 .tree-file:hover,
-.tree-file.active {
+.tree-file.active,
+.tree-group.drop-target > .tree-toggle {
   background: var(--panel-2);
 }
 
@@ -225,6 +227,7 @@ svg {
 
 .icon-button,
 .primary-action,
+.secondary-action,
 .ghost-action {
   display: inline-flex;
   align-items: center;
@@ -248,6 +251,15 @@ svg {
   background: var(--teal);
   color: #fff;
   padding: 0 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.secondary-action {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 0 12px;
   font-weight: 700;
   font-size: 14px;
 }
@@ -318,6 +330,12 @@ svg {
   font-size: 16px;
 }
 
+.section-heading p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .section-heading span {
   color: var(--muted);
   font-size: 12px;
@@ -331,6 +349,68 @@ svg {
   gap: 8px;
 }
 
+.folder-section {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.folder-section.drag-over {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+}
+
+.folder-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 46px;
+  padding: 10px 12px;
+  background: #fbfaf7;
+  border-bottom: 1px solid var(--line);
+}
+
+.folder-title {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.folder-title span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.folder-count {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.folder-dropzone {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 58px;
+  padding: 10px;
+}
+
+.folder-empty {
+  border: 1px dashed var(--line-strong);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
 .automation-card {
   width: 100%;
   text-align: left;
@@ -340,6 +420,14 @@ svg {
   padding: 12px;
   cursor: pointer;
   transition: border-color 0.14s ease, background 0.14s ease, transform 0.14s ease;
+}
+
+.automation-card[draggable="true"] {
+  cursor: grab;
+}
+
+.automation-card.dragging {
+  opacity: 0.45;
 }
 
 .automation-card:hover {
@@ -353,6 +441,12 @@ svg {
 }
 
 .card-main {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -404,6 +498,34 @@ svg {
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
+}
+
+.move-control {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.move-control select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+  padding: 7px 8px;
+  font-size: 12px;
+}
+
+.move-control select:focus {
+  outline: 0;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.11);
 }
 
 .tag.source {
@@ -519,6 +641,7 @@ iframe {
 
   .topbar-actions,
   .primary-action,
+  .secondary-action,
   .ghost-action {
     width: 100%;
   }
